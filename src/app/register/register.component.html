@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="login-wrapper">
+        <div class="header">Register</div>
+        <div class="form-wrapper">
+            <form [formGroup]="registerFrom" (ngSubmit)="sendUserRegisterMsg()">
+                <div>
+                    <input type="text" name="username" placeholder="username" class="input-item"
+                        formControlName="username">
+                    <div class="login-error" *ngIf="this.registerFrom.get('username')?.errors?.['required']">
+                        用户名不能为空
+                    </div>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="password" class="input-item"
+                        formControlName="password">
+                    <div class="login-error" *ngIf="this.registerFrom.get('password')?.errors?.['required']">
+                        密码不能为空
+                    </div>
+                </div>
+                <div>
+                    <input type="password" name="repassword" placeholder="repassword" class="input-item"
+                        formControlName="repassword">
+                    <div class="login-error"
+                        *ngIf="this.registerFrom.get('repassword')?.value!=this.registerFrom.get('password')?.value">
+                        确认密码与密码不一致
+                    </div>
+                </div>
+                <div>
+                    <input type="text" name="email" placeholder="email" class="input-item" formControlName="email">
+                    <div class="login-error" *ngIf="this.registerFrom.get('email')?.errors?.['email']">
+                        邮箱格式不正确
+                    </div>
+                </div>
+                <div>
+                    <input type="text" min="11" max="11" name="tel" placeholder="tel" class="input-item"
+                        formControlName="tel">
+                    <div class="login-error" *ngIf="this.registerFrom.get('tel')?.errors?.[11]">
+                        电话格式不正确
+                    </div>
+                </div>
+                <button type="submit" class="btn">Sign up</button>
+            </form>
+        </div>
+        <div class="msg">
+            Do you already have an account?
+             <a href="#" [routerLink]="['/register']"
+             
+             ><strong>Sign in</strong></a>
+        </div>
+    </div>
+</div>

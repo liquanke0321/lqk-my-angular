@@ -3,12 +3,12 @@
         <div class="header">Login</div>
         <div class="form-wrapper">
             <input type="text" name="username" placeholder="username" class="input-item" [(ngModel)]="username">
-            <input type="password" name="password" placeholder="password" class="input-item" [(ngModel)]="password">
-            <button class="btn" (click)="sendUserMsg()">Login</button>
+            <input type="password" name="password" placeholder="password" class="input-item"[(ngModel)]="password">
+            <button class="btn" (click)="sendUserMsg()">Sign in</button>
         </div>
         <div class="msg">
             Don't have account?
-            <a href="#">Sign up</a>
+            <a href="#" [routerLink]="['/register']"><strong>Sign up</strong></a>
         </div>
     </div>
 </div>
