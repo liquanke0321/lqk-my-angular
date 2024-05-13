@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
@@ -17,14 +18,15 @@ export class LoginComponent {
   password: string = ''
   //配置http请求
   http: HttpClient
-name: any;
+  rotuer: Router;
 
   // 构造方法
-  constructor(httpClient: HttpClient, private notification: NzNotificationService) {
+  constructor(httpClient: HttpClient, private notification: NzNotificationService, router: Router) {
     this.http = httpClient;
+    this.rotuer = router;
   }
 
-  // 第三方组件  消息提示框     （暂时有问题，渲染不出来）
+  // 第三方组件  消息提示框
   reslutType: string = ''
   reslutTitle: string = ''
   reslutMsg: string = ''
@@ -38,7 +40,7 @@ name: any;
 
   sendUserMsg() {
     // 发送http请求
-    // this.http.post(`${this.preURL}/userLogin`, { username: this.username, password: this.password }) post的请求方式暂时还有问题
+    // this.http.post(`${this.preURL}/userLogin`, { username: this.username, password: this.password }) //post的请求方式暂时还有问题
     this.http.get(`${this.preURL}/userLogin?username=${this.username}&password=${this.password}`)
       .subscribe(
         (res: any) => {
@@ -47,6 +49,7 @@ name: any;
             this.reslutType = "success";
             this.reslutTitle = res.reslutTitle;
             this.reslutMsg = res.reslutMsg;
+            this.rotuer.navigate(["/main"], { queryParams: { username: this.username } })
           } else {
             this.reslutType = "error";
             this.reslutTitle = res.reslutTitle;
