@@ -49,7 +49,7 @@ export class LoginComponent {
             this.reslutType = "success";
             this.reslutTitle = res.reslutTitle;
             this.reslutMsg = res.reslutMsg;
-            this.rotuer.navigate(["/main"], { queryParams: { username: this.username } })
+            this.rotuer.navigate(["/welcome/"], { queryParams: { username: this.username } })
           } else {
             this.reslutType = "error";
             this.reslutTitle = res.reslutTitle;

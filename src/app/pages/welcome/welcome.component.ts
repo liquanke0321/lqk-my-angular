@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() { }
+  //侧边栏展开缩进
+  isCollapsed = false;
+  constructor() {
+  }
+  ngOnInit(): void {
+  }
 
 }
