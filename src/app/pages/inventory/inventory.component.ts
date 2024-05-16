@@ -62,12 +62,20 @@ export class InventoryComponent {
     { headerName: "商品名称", field: "product", flex: 2, editable: true, checkboxSelection: true },
     { headerName: "分类", field: "classification", flex: 1 },
     { headerName: "价格", field: "price", valueFormatter: p => '￥' + p.value.toLocaleString(), flex: 1 },
-    { cellRenderer: ChangeProductComponent, flex: 2 },
+    { cellRenderer: ChangeProductComponent,  cellRendererParams: { onClick: this.comeBackPopupData.bind(this)},flex: 2 },
 
   ];
 
   defaultColDef: ColDef = {
     flex: 1,
+  }
+  comeBackPopupData(e:any){
+    this.rowData[e.rowIndex]={product:e.product, classification:e.classification, price:e.price}
+    alert(JSON.stringify(e.product)+"aaaaaaaaaaaa")
+    alert(JSON.stringify(e.classification)+"aaaaaaaaaaaa")
+    alert(JSON.stringify(e.price)+"aaaaaaaaaaaa")
+    alert(JSON.stringify(e.rowIndex)+"aaaaaaaaaaaa")
+ console.log(e.rowData+"aaaaaaaaaaaa")
   }
 
   rowSelection = 'single';//设置多行选中 ，如果是mutiple则是多选，若是single则是单选
@@ -75,5 +83,4 @@ export class InventoryComponent {
   paginationPageSize = 10;
   paginationPageSizeSelector = [10, 20, 30];
   
-}
-
+  }
