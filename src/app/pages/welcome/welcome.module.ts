@@ -11,6 +11,10 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { UserInformationComponent } from '../user-information/user-information.component';
 import { InventoryComponent } from '../inventory/inventory.component';
 import { AgGridAngular } from 'ag-grid-angular';
+import { ChangeProductComponent } from '../change-product/change-product.component';
+import { PopupComponent } from '../popup/popup.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,14 +23,17 @@ import { AgGridAngular } from 'ag-grid-angular';
     MainComponent,
     HomeComponent,
     UserInformationComponent,
-    InventoryComponent
-    
+    InventoryComponent,
+    ChangeProductComponent,
+    PopupComponent
   ],
   imports: [WelcomeRoutingModule,
     NzMenuModule,
     IconsProviderModule,
     NzLayoutModule,
-    AgGridAngular
+    AgGridAngular,
+    NzModalModule,
+    FormsModule
   ],
   exports: [
     WelcomeComponent

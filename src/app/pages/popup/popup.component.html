@@ -1,0 +1,13 @@
+<button nz-button nzType="primary" (click)="showModal()">
+    <p> {{buttonName}}</p>
+</button>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="{{buttonName}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+    [nzOkLoading]="isOkLoading">
+    <div *nzModalContent>
+        <div>
+            <p>商品名称</p><input type="text" [(ngModel)]="product">
+            <p>分类</p><input type="text" [(ngModel)]="classification">
+            <p>价格</p><input type="text" [(ngModel)]="price">
+        </div>
+    </div>
+</nz-modal>
