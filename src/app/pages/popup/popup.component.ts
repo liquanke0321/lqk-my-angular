@@ -9,7 +9,13 @@ export class PopupComponent {
 
   @Input('buttonName')
   buttonName:string=''
+  @Input('columnName')
+  columnName=new Map([["1","2"]]);
 
+  @Input('productID')
+  productID: number=0
+  @Output()
+  getProductID = new EventEmitter();
   @Input('product')
   product: string=''
   @Output()
@@ -24,7 +30,7 @@ export class PopupComponent {
   price: number=0
   @Output()
   getPrice = new EventEmitter();
-
+  
 
   
   isVisible = false;
@@ -36,14 +42,15 @@ export class PopupComponent {
 
   handleOk(): void {
     this.isOkLoading = true;
-    alert(this.product +"+"+this.classification+"+"+this.price)
     this.getProduct.emit(this.product)
     this.getClassification.emit(this.classification)
     this.getPrice.emit(this.price)
+    this.getProductID.emit(this.productID)
     setTimeout(() => {
       this.isVisible = false;
       this.isOkLoading = false;
     }, 1000);
+    console.log(this.columnName)
   }
 
   handleCancel(): void {
