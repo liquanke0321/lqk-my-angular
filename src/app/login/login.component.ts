@@ -40,12 +40,13 @@ export class LoginComponent {
 
   sendUserMsg() {
     // 发送http请求
-    // this.http.post(`${this.preURL}/userLogin`, { username: this.username, password: this.password }) //post的请求方式暂时还有问题
-    this.http.get(`${this.preURL}/userLogin?username=${this.username}&password=${this.password}`)
+    this.http.post(`${this.preURL}/userLogin`, { userName: this.username, passWord: this.password })
+    // this.http.get(`${this.preURL}/userLogin?username=${this.username}&password=${this.password}`)
       .subscribe(
         (res: any) => {
           // 判断查询状态
-          if (res.reslut == "OK") {
+          console.log(res)
+          if (res.reslutStatus == "OK") {
             this.reslutType = "success";
             this.reslutTitle = res.reslutTitle;
             this.reslutMsg = res.reslutMsg;
