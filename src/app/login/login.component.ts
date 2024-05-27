@@ -30,6 +30,7 @@ export class LoginComponent {
   reslutType: string = ''
   reslutTitle: string = ''
   reslutMsg: string = ''
+  userContentVo :UserData[] = []
   createNotification(reslutType: string, reslutTitle: string, reslutMsg: string): void {
     this.notification.create(
       reslutType,
@@ -40,17 +41,17 @@ export class LoginComponent {
 
   sendUserMsg() {
     // 发送http请求
-    this.http.post(`${this.preURL}/userLogin`, { userName: this.username, passWord: this.password })
+    this.http.post(`${this.preURL}/userLogin`, { username: this.username, password: this.password })
     // this.http.get(`${this.preURL}/userLogin?username=${this.username}&password=${this.password}`)
       .subscribe(
         (res: any) => {
           // 判断查询状态
-          console.log(res)
           if (res.reslutStatus == "OK") {
             this.reslutType = "success";
             this.reslutTitle = res.reslutTitle;
             this.reslutMsg = res.reslutMsg;
-            this.rotuer.navigate(["/welcome/"], { queryParams: { username: this.username } })
+            this.userContentVo = res.userContentVo
+            this.rotuer.navigate(["/welcome/home"], { queryParams: { aliasname: res.userContentVo.aliasname } })
           } else {
             this.reslutType = "error";
             this.reslutTitle = res.reslutTitle;
@@ -59,4 +60,15 @@ export class LoginComponent {
           this.createNotification(this.reslutType, this.reslutTitle, this.reslutMsg)
         })
   }
+  
+}
+interface UserData {
+  address: string;
+  age: number;
+  aliasname: string;
+  mail: string;
+  password: string;
+  phonenumber: number;
+  userid: number;
+  username: string;
 }
