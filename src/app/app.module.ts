@@ -3,8 +3,12 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+// 中文
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
+// 英文
+import { en_US } from 'ng-zorro-antd/i18n';
+import en from '@angular/common/locales/en';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +25,16 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 import { WelcomeModule } from './pages/welcome/welcome.module';
 
-registerLocaleData(zh);
+// 浏览器设定的语言
+let lang = (localStorage.getItem('currentLanguage') 
+  || window.navigator.language || '').includes('zh') ? 'zh' : 'en';
+
+// 切换语言
+let useLang: any = zh_CN;
+switch(lang) {
+  case 'zh': registerLocaleData(zh); useLang = zh_CN; break;
+  default: registerLocaleData(en); useLang = en_US; break;
+}
 
 @NgModule({
   declarations: [
@@ -44,7 +57,7 @@ registerLocaleData(zh);
   ],
   providers: [
     provideClientHydration(),
-    { provide: NZ_I18N, useValue: zh_CN },
+    { provide: NZ_I18N, useValue: useLang },
     provideAnimationsAsync(),
     provideHttpClient()
   ],

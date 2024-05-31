@@ -21,14 +21,15 @@
         <nz-form-item>
             <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
             <nz-form-control [nzSpan]="12" nzDisableAutoTips nzErrorTip="Please input your password!">
-                <input nz-input type="password" formControlName="password" [ngModel]="password"
+                <input nz-input type="password" formControlName="password" 　placeholder="password" [ngModel]="password"
                     (ngModelChange)="validateConfirmPassword()" />
             </nz-form-control>
         </nz-form-item>
-        <nz-form-item *ngIf="!isDisabled" >
+        <nz-form-item *ngIf="!isDisabled">
             <nz-form-label [nzSpan]="7" nzRequired>Confirm Password</nz-form-label>
             <nz-form-control [nzSpan]="12" nzDisableAutoTips [nzErrorTip]="passwordErrorTpl">
-                <input nz-input type="password" formControlName="confirm" placeholder="confirm your password" [ngModel]="password"/>
+                <input nz-input type="password" formControlName="confirm" placeholder="confirm your password"
+                    [ngModel]="password" />
                 <ng-template #passwordErrorTpl let-control>
                     @if (control.errors?.['required']) {
                     Please confirm your password!
@@ -41,10 +42,10 @@
         </nz-form-item>
         <nz-form-item>
             <nz-form-control [nzOffset]="7" [nzSpan]="3">
-                <button nz-button nzType="primary">保存</button>
+                <button nz-button nzType="primary" [disabled]="isDisabled">保存</button>
             </nz-form-control>
             <nz-form-control [nzOffset]="7" [nzSpan]="12">
-                <button (click)="toggleDisabled()">修改</button>
+                <button [disabled]="!isDisabled" (click)="toggleDisabled()">修改</button>
             </nz-form-control>
         </nz-form-item>
     </form>
