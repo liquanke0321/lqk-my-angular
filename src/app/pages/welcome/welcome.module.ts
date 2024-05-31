@@ -14,8 +14,9 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { ChangeProductComponent } from '../change-product/change-product.component';
 import { PopupComponent } from '../popup/popup.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, KeyValuePipe } from '@angular/common';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 
 @NgModule({
@@ -36,7 +37,10 @@ import { CommonModule, KeyValuePipe } from '@angular/common';
     NzModalModule,
     FormsModule,
     KeyValuePipe,
-    CommonModule//使用内置指令的时候必须要引入
+    CommonModule,//使用内置指令的时候必须要引入
+    NzLayoutModule,
+    NzFormModule,
+    ReactiveFormsModule
 
   ],
   exports: [
