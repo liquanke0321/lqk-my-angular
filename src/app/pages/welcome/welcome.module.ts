@@ -17,6 +17,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, KeyValuePipe } from '@angular/common';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { AddInbentoryComponent } from '../inbentory-in/add-inbentory/add-inbentory.component';
+import { CutInbentoryComponent } from '../inbentory-out/cut-inbentory/cut-inbentory.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     UserInformationComponent,
     InventoryComponent,
     ChangeProductComponent,
-    PopupComponent
+    PopupComponent,
+    AddInbentoryComponent,
+    CutInbentoryComponent
   ],
   imports: [WelcomeRoutingModule,
     NzMenuModule,

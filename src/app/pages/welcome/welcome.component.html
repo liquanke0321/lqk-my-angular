@@ -6,29 +6,40 @@
       [(nzCollapsed)]="isCollapsed"
       [nzTrigger]="null">
       <div class="sidebar-logo">
-        <a href="https://ng.ant.design/" target="_blank">
+        <a href="https://www.ag-grid.com/" target="_blank">
           <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-          <h1>Ant Design Of Angular</h1>
+          <!-- <h1>这里写我的系统名</h1> -->
         </a>
+        <h1><a href="https://ng.ant.design/" target="_blank">点我去NG-ZORRO官网</a></h1><!--这段以后删掉 -->
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+        <li nz-submenu nzOpen nzTitle="控制台" nzIcon="home">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/welcome/home" routerLinkActive="active">home</a>
+              <a routerLink="/welcome/home" routerLinkActive="active" (click)="changeheaderName('主页')">主页</a>
             </li>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/welcome/userInformation"  routerLinkActive="active">userInformation</a>
+              <a routerLink="/welcome/userInformation"  routerLinkActive="active" (click)="changeheaderName('用户信息')">用户信息</a>
             </li>
             <li nz-menu-item nzMatchRouter>
-              <a routerLink="/welcome/inventory"  routerLinkActive="active" >inventory</a>
+              <a routerLink="/welcome/inventory"  routerLinkActive="active" (click)="changeheaderName('库存清单')">库存清单</a>
             </li>
           </ul>
         </li>
-        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+        <li nz-submenu nzOpen nzTitle="库存管理" nzIcon="shopping">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a>Basic Form</a>
+              <a routerLink="/welcome/addInbentory"  routerLinkActive="active" (click)="changeheaderName('入库登记')">入库登记</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/welcome/cutInbentory"  routerLinkActive="active" (click)="changeheaderName('出库登记')">出库登记</a>
+            </li>
+          </ul>
+        </li>
+        <li nz-submenu nzOpen nzTitle="订单管理" nzIcon="red-envelope">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a  routerLinkActive="active" (click)="changeheaderName('订单登记')">订单登记</a>
             </li>
           </ul>
         </li>
@@ -43,7 +54,7 @@
                  [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
               ></span>
             </span>
-            <span style="font-size: 50px;" >aaaaaa</span>
+            <span style="font-size: 25px;" >{{headrname}}</span>
           </div>
       </nz-header>
       <nz-content>
@@ -52,5 +63,6 @@
         </div>
       </nz-content>
     </nz-layout>
+
   </nz-layout>
   

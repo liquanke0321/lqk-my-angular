@@ -10,31 +10,24 @@ import { ICellRendererParams } from 'ag-grid-community';
 })
 export class ChangeProductComponent implements ICellRendererAngularComp {
 
-  @Input('productID')
-  productID: number= 0;
+  @Input('productId')
+  productId: number = 0;
   @Input('product')
   product: string = '';
   @Input('classification')
   classification: string = '';
   @Input('price')
   price: number = 0;
-  @Input('columnName')
-  columnName = new Map([
-    ["商品ID", "value1"],
-    ["商品名称", "product"],
-    ["分类", "classification"],
-    ["价格", "price"]
-]); 
+  @Input('buttonFlg')
+  buttonFlg: boolean = true
 
-  nameForUpdate: string = '更新';
-  nameForDelete: string = '删除';
   params: any;
-  dataRowIndex:number=0;
+  dataRowIndex: number = 0;
 
   agInit(params: ICellRendererParams<any, any, any>): void {
     this.params = params
     this.dataRowIndex = params.rowIndex
-    this.productID = params.data.product;
+    this.productId = params.data.productId;
     this.product = params.data.product;
     this.classification = params.data.classification;
     this.price = params.data.price;
@@ -43,8 +36,8 @@ export class ChangeProductComponent implements ICellRendererAngularComp {
     return true
   }
 
-  getProductID(event: any) {
-    this.productID = event
+  getProductId(event: any) {
+    this.productId = event
   }
   getProduct(event: any) {
     this.product = event
@@ -54,20 +47,25 @@ export class ChangeProductComponent implements ICellRendererAngularComp {
   }
   getPrice(event: any) {
     this.price = event
+  }
+  getButtonFlg(event: any) {
+    this.buttonFlg = event
     this.onClick();
   }
   onClick() {
-
     if (this.params.onClick instanceof Function) {
+
       // put anything into params u want pass into parents component
       const params = {
-        // rowData: this.params.node.data,//可以只穿有用的东西
-        productID: this.productID,
+        // rowData: this.params.node.data,//可以只传有用的东西
+        buttonFlg: this.buttonFlg,
+        productId: this.productId,
         product: this.product,
         classification: this.classification,
         price: this.price,
-        rowIndex:this.dataRowIndex
+        rowIndex: this.dataRowIndex
       }
+      
       this.params.onClick(params);
 
     }

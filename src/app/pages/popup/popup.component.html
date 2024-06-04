@@ -4,22 +4,22 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="{{buttonName}}" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
     [nzOkLoading]="isOkLoading">
     <div *nzModalContent>
-        <!-- <div class="" *ngFor="let item of columnName | keyvalue">
-            <p>{{item.key}}</p><p>{{item.value}}</p>
-            <input type="text"  [(ngModel)]="product" value="{{item.value}}" >
-        </div> -->
-
-        <div>
-            <p>商品ID</p><input type="text" [(ngModel)]="productID"[disabled]="true">
+        <div *ngIf="buttonflg">
+            <div>
+                <p>商品ID</p><input type="text" [(ngModel)]="productId" [disabled]="true">
+            </div>
+            <div>
+                <p>商品名称</p><input type="text" [(ngModel)]="product">
+            </div>
+            <div>
+                <p>分类</p><input type="text" [(ngModel)]="classification">
+            </div>
+            <div>
+                <p>价格</p><input type="text" [(ngModel)]="price">
+            </div>
         </div>
-        <div>
-            <p>商品名称</p><input type="text" [(ngModel)]="product">
-        </div>
-        <div>
-            <p>分类</p><input type="text" [(ngModel)]="classification">
-        </div>
-        <div>
-            <p>价格</p><input type="text" [(ngModel)]="price">
+        <div *ngIf="!buttonflg">
+            <p>确定删除该数据吗？</p>
         </div>
     </div>
 </nz-modal>

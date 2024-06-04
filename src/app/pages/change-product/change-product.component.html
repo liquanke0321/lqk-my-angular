@@ -1,3 +1,5 @@
-<app-popup [buttonName]="nameForUpdate" [product]="product" [classification]="classification" [price]="price" [productID]="productID" [columnName]="columnName"
-    (getProduct)="getProduct($event)" (getClassification)="getClassification($event)" (getPrice)="getPrice($event)"></app-popup>
-<app-popup [buttonName]="nameForDelete"></app-popup>
+<app-popup [buttonName]="'更新'" [buttonFlg]="true" [product]="product" [classification]="classification" [price]="price"
+    [productId]="productId" (getProductId)="getProductId($event)" (getProduct)="getProduct($event)"
+    (getClassification)="getClassification($event)" (getPrice)="getPrice($event)"
+    (getButtonFlg)="getButtonFlg($event)"></app-popup>
+<app-popup [buttonName]="'删除'" [buttonFlg]="false" (getButtonFlg)="getButtonFlg($event)"></app-popup>

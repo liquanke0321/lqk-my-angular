@@ -80,11 +80,16 @@ export class InventoryComponent {
   paginationPageSizeSelector = [10, 20, 30];//可以设置一页几行
 
   comeBackPopupData(e: any) {
-    //按行刷新数据，只刷新单行
     var row = this.gridApi.getDisplayedRowAtIndex(e.rowIndex)!;//这个对象中有个data属性，需要改data中的值
-    row.data = { productID:e.productID, product: e.product, classification: e.classification, price: e.price }
+    if(e.buttonFlg){
+    //按行刷新数据，只刷新单行
+    row.data = { productId:e.productId, product: e.product, classification: e.classification, price: e.price }
     this.gridApi.redrawRows({ rowNodes: [row] });
-
+    //在这里写更新的后台 通信逻辑
+  }else{
+    this.gridApi.hideOverlay()
+        //在这里写删除的后台 通信逻辑
+  }
     //按单元格刷新数据a
     // this.rowData[e.rowIndex].product=e.product;
     // this.rowData[e.rowIndex].classification=e.classification;
