@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, NonNullableFormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { Observable, Observer } from 'rxjs';
+import { UserAuthInfoModel } from '../../model/user-auth-info-model';
+import { CommonService } from '../../common/common.service';
 
 
 @Component({
@@ -9,24 +11,51 @@ import { Observable, Observer } from 'rxjs';
   templateUrl: './user-information.component.html',
   styleUrl: './user-information.component.css'
 })
-export class UserInformationComponent implements OnInit{
+export class UserInformationComponent implements OnInit {
 
   validateForm: FormGroup<{
     userName: FormControl<string>;
-    mobile: FormControl<string>;
+    mobile: FormControl<number>;
     email: FormControl<string>;
     password: FormControl<string>;
     confirm: FormControl<string>;
+    aliasname: FormControl<string>;
+    age: FormControl<string>;
+    address: FormControl<string>;
   }>;
 
   isDisabled: boolean = false;
-  username:string= "username"
-  mobile:string= "mobile"
-  email:string= "email"
-  password:string= "password"
+  authInfo = this.common.getAuthInfo()
+  username: string = this.authInfo.username
+  mobile: number | null | undefined = this.authInfo.phone_number
+  aliasname: string | null | undefined = this.authInfo.aliasname
+  email: string | null | undefined = this.authInfo.mail
+  age: number | null | undefined = this.authInfo.age
+  password: string = this.authInfo.password
+  address: string | null | undefined= this.authInfo.address
 
-  // current locale is key of the nzAutoTips
-  // if it is not found, it will be searched again with `default`
+  
+  constructor(
+    private fb: NonNullableFormBuilder,
+    public common: CommonService
+  ) {
+
+    const { required, maxLength, minLength, email, mobile } = MyValidators;
+    this.validateForm = this.fb.group({
+      userName: ['', [required, maxLength(12), minLength(6)], [this.userNameAsyncValidator]],
+      mobile: [0, [required, mobile]],
+      email: ['', [required, email]],
+      password: ['', [required]],
+      aliasname: ['', [required]],
+      age: ['', [required]],
+      address: ['', [required]],
+      confirm: ['', [this.confirmValidator]]
+    });
+  }
+  ngOnInit(): void {
+    this.toggleDisabled()
+  }
+  //如果没有找到，将使用' default '再次搜索
   autoTips: Record<string, Record<string, string>> = {
     'zh-cn': {
       required: '必填项'
@@ -79,36 +108,29 @@ export class UserInformationComponent implements OnInit{
     return {};
   };
 
-  constructor(private fb: NonNullableFormBuilder) {
-    // use `MyValidators`
-    const { required, maxLength, minLength, email, mobile } = MyValidators;
-    this.validateForm = this.fb.group({
-      userName: ['', [required, maxLength(12), minLength(6)], [this.userNameAsyncValidator]],
-      mobile: ['', [required, mobile]],
-      email: ['', [required, email]],
-      password: ['', [required]],
-      confirm: ['', [this.confirmValidator]]
-    });
-  }
-  ngOnInit(): void {
-    this.toggleDisabled()
-  }
-
   toggleDisabled() {
     if (this.isDisabled) {
       this.validateForm.get('mobile')?.enable();
       this.validateForm.get('email')?.enable();
       this.validateForm.get('password')?.enable();
+      this.validateForm.get('age')?.enable();
+      this.validateForm.get('address')?.enable();
+      this.validateForm.get('aliasname')?.enable();
     } else {
       this.validateForm.get('mobile')?.disable();
       this.validateForm.get('email')?.disable();
       this.validateForm.get('password')?.disable();
+      this.validateForm.get('age')?.disable();
+      this.validateForm.get('address')?.disable();
+      this.validateForm.get('aliasname')?.disable();
     }
     this.isDisabled = !this.isDisabled;
   }
+  saveChangeData(){
+    console.log("userinfo Change success")
+  }
 }
 
-// current locale is key of the MyErrorsOptions
 export type MyErrorsOptions = { 'zh-cn': string; en: string } & Record<string, NzSafeAny>;
 export type MyValidationErrors = Record<string, MyErrorsOptions>;
 

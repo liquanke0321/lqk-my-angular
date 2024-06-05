@@ -14,13 +14,13 @@ const routes: Routes = [
   {
     path: '', component: WelcomeComponent,
     children: [
-      { path: '', component: HomeComponent },//,  canActivate: [AuthGuard]
-      { path: 'main', component: MainComponent },//,  canActivate: [AuthGuard]
-      { path: 'home', component: HomeComponent },//,  canActivate: [AuthGuard]
+      { path: '', component: HomeComponent ,  canActivate: [AuthGuard]},//,  canActivate: [AuthGuard]
+      { path: 'main', component: MainComponent ,  canActivate: [AuthGuard]},//,  canActivate: [AuthGuard]
+      { path: 'home', component: HomeComponent ,  canActivate: [AuthGuard]},//,  canActivate: [AuthGuard]
       { path: 'inventory', component: InventoryComponent },//,  canActivate: [AuthGuard]
-      { path: 'userInformation', component: UserInformationComponent },//,  canActivate: [AuthGuard]
-      { path: 'addInbentory', component: AddInbentoryComponent },//,  canActivate: [AuthGuard]
-      { path: 'cutInbentory', component: CutInbentoryComponent },//,  canActivate: [AuthGuard]
+      { path: 'userInformation', component: UserInformationComponent ,  canActivate: [AuthGuard]},//,  canActivate: [AuthGuard]
+      { path: 'addInbentory', component: AddInbentoryComponent ,  canActivate: [AuthGuard]},//,  canActivate: [AuthGuard]
+      { path: 'cutInbentory', component: CutInbentoryComponent ,  canActivate: [AuthGuard]},//,  canActivate: [AuthGuard]
       // { path: '**', component: MainComponent },
     ]
   },

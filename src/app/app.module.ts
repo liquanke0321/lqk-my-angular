@@ -24,6 +24,8 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 
 import { WelcomeModule } from './pages/welcome/welcome.module';
+import { AuthGuard } from './common/auth.guard';
+import { CommonService } from './common/common.service';
 
 // 浏览器设定的语言
 let lang = (localStorage.getItem('currentLanguage') 
@@ -59,7 +61,9 @@ switch(lang) {
     provideClientHydration(),
     { provide: NZ_I18N, useValue: useLang },
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
+    AuthGuard,
+    CommonService
   ],
   bootstrap: [AppComponent]
 })

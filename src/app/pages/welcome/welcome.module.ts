@@ -19,6 +19,8 @@ import { CommonModule, KeyValuePipe } from '@angular/common';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { AddInbentoryComponent } from '../inbentory-in/add-inbentory/add-inbentory.component';
 import { CutInbentoryComponent } from '../inbentory-out/cut-inbentory/cut-inbentory.component';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 
 @NgModule({
@@ -31,7 +33,7 @@ import { CutInbentoryComponent } from '../inbentory-out/cut-inbentory/cut-inbent
     ChangeProductComponent,
     PopupComponent,
     AddInbentoryComponent,
-    CutInbentoryComponent
+    CutInbentoryComponent,
   ],
   imports: [WelcomeRoutingModule,
     NzMenuModule,
@@ -44,7 +46,9 @@ import { CutInbentoryComponent } from '../inbentory-out/cut-inbentory/cut-inbent
     CommonModule,//使用内置指令的时候必须要引入
     NzLayoutModule,
     NzFormModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzInputModule,
+    NzGridModule
 
   ],
   exports: [

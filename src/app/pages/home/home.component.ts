@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonService } from '../../common/common.service';
 
 @Component({
   selector: 'app-home',
@@ -9,21 +10,19 @@ import { ActivatedRoute } from '@angular/router';
 
 export class HomeComponent implements OnInit {
 
-  
 
-  aliasname: string = ''
 
-  constructor(private route: ActivatedRoute) {
+  aliasname: string | undefined = ''
+
+  constructor(private route: ActivatedRoute,
+    public common: CommonService
+  ) {
   }
 
   isCollapsed = false;
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe(
-      (res: any) => {
-        this.aliasname = res.get("aliasname")
-      }
-    )
+    this.aliasname = this.common.getAuthInfo().aliasname
   }
-  
+
 }

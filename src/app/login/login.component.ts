@@ -21,10 +21,13 @@ export class LoginComponent implements OnInit {
   //配置http请求
   http: HttpClient
   rotuer: Router;
-  common: CommonService = new CommonService;
 
   // 构造方法
-  constructor(httpClient: HttpClient, private notification: NzNotificationService, router: Router) {
+  constructor(httpClient: HttpClient,
+    private notification: NzNotificationService,
+    router: Router,
+    public common: CommonService
+  ) {
 
     this.http = httpClient;
     this.rotuer = router;
@@ -38,7 +41,6 @@ export class LoginComponent implements OnInit {
   reslutType: string = ''
   reslutTitle: string = ''
   reslutMsg: string = ''
-  userContentVo: UserData[] = []
   createNotification(reslutType: string, reslutTitle: string, reslutMsg: string): void {
     this.notification.create(
       reslutType,
@@ -58,12 +60,21 @@ export class LoginComponent implements OnInit {
             this.reslutType = "success";
             this.reslutTitle = res.reslutTitle;
             this.reslutMsg = res.reslutMsg;
-            this.userContentVo = res.userContentVo
-            this.rotuer.navigate(["/welcome/home"], { queryParams: { aliasname: res.userContentVo.aliasname } })
 
             //设定登录信息
             let authInfo: UserAuthInfoModel = new UserAuthInfoModel;
+            authInfo.accountCd = "1"
+            authInfo.userid = res.userContentVo.userid;
+            authInfo.username = res.userContentVo.username;
+            authInfo.aliasname = res.userContentVo.aliasname;
+            authInfo.password = res.userContentVo.password;
+            authInfo.age = res.userContentVo.age;
+            authInfo.mail = res.userContentVo.mail;
+            authInfo.phone_number = res.userContentVo.phoneNumber;
+            authInfo.address = res.userContentVo.address;
             this.common.setAuthInfo(authInfo);
+            this.rotuer.navigate(["/welcome/home"])//, { queryParams: { aliasname: authInfo.aliasname } }
+            console.log(this.common.getAuthInfo()) 
           } else {
             this.reslutType = "error";
             this.reslutTitle = res.reslutTitle;
@@ -73,14 +84,4 @@ export class LoginComponent implements OnInit {
         })
   }
 
-}
-interface UserData {
-  address: string;
-  age: number;
-  aliasname: string;
-  mail: string;
-  password: string;
-  phonenumber: number;
-  userid: number;
-  username: string;
 }

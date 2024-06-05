@@ -1,13 +1,25 @@
 <div class="content" style="width: 100%; height: 100%;">
     <form nz-form [nzAutoTips]="autoTips" [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <nz-form-item>
-            <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
+            <nz-form-label [nzSpan]="7" nzRequired>用户名</nz-form-label>
             <nz-form-control [nzSpan]="12" nzValidatingTip="Validating...">
                 <span>{{username}}</span>
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <nz-form-label [nzSpan]="7" nzRequired>Mobile</nz-form-label>
+            <nz-form-label [nzSpan]="7" nzRequired>店铺名称</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+                <input nz-input formControlName="aliasname" placeholder="aliasname" [ngModel]="aliasname" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>店龄</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+                <input nz-input formControlName="age" placeholder="age" [ngModel]="age" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>电话</nz-form-label>
             <nz-form-control [nzSpan]="12">
                 <input nz-input formControlName="mobile" placeholder="mobile" [ngModel]="mobile" />
             </nz-form-control>
@@ -19,14 +31,14 @@
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
+            <nz-form-label [nzSpan]="7" nzRequired>密码</nz-form-label>
             <nz-form-control [nzSpan]="12" nzDisableAutoTips nzErrorTip="Please input your password!">
-                <input nz-input type="password" formControlName="password"  placeholder="password" [ngModel]="password"
+                <input nz-input type="password" formControlName="password" placeholder="password" [ngModel]="password"
                     (ngModelChange)="validateConfirmPassword()" />
             </nz-form-control>
         </nz-form-item>
         <nz-form-item *ngIf="!isDisabled">
-            <nz-form-label [nzSpan]="7" nzRequired>Confirm Password</nz-form-label>
+            <nz-form-label [nzSpan]="7" nzRequired>确认密码</nz-form-label>
             <nz-form-control [nzSpan]="12" nzDisableAutoTips [nzErrorTip]="passwordErrorTpl">
                 <input nz-input type="password" formControlName="confirm" placeholder="confirm your password"
                     [ngModel]="password" />
@@ -41,8 +53,14 @@
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>地址</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+                <input nz-input formControlName="address" placeholder="address" [ngModel]="address" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
             <nz-form-control [nzOffset]="7" [nzSpan]="3">
-                <button nz-button nzType="primary" [disabled]="isDisabled">保存</button>
+                <button nz-button nzType="primary" [disabled]="isDisabled" (click)="saveChangeData()">保存</button>
             </nz-form-control>
             <nz-form-control [nzOffset]="7" [nzSpan]="12">
                 <button [disabled]="!isDisabled" (click)="toggleDisabled()">修改</button>
