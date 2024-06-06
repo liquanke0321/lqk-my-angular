@@ -9,10 +9,9 @@ interface IRow {
   productId: number;
   productName: string;
   productNumber: number;
-  productPrice: string;
+  productPrice: number;
   productType: string;
   productVersion: string;
-  inventoryId: string;
 }
 
 @Component({
@@ -21,9 +20,9 @@ interface IRow {
   styleUrl: './inventory.component.css'
 })
 
-export class InventoryComponent {
+export class InventoryComponent implements OnInit {
   //检索项目定义
-  productId_serch: string = "";
+  productId_search: string = "";
 
 
   gridApi: any;
@@ -32,20 +31,20 @@ export class InventoryComponent {
 
   themeClass = "ag-theme-quartz-dark";
 
-  preURL :string = "/api/product"; 
+  preURL: string = "/api/product";
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
   }
-  indexa: number = 1
   // 行数据在这里赋值
-  rowData: IRow[] = [
-
-  ];
+  rowData: IRow[] = [];
 
   //配置http请求
   http: HttpClient
   constructor(httpClient: HttpClient,) {
     this.http = httpClient;
+  }
+  ngOnInit(): void {
+
   }
   // 列定义:定义和控制网格列。对应的是html中的[columnDefs]="colDefs"这个属性
   // headerName 定义列名
@@ -60,7 +59,6 @@ export class InventoryComponent {
     { headerName: "价格", field: "productPrice", valueFormatter: p => '￥' + p.value.toLocaleString(), flex: 1 },
     { headerName: "类型", field: "productType", flex: 1 },
     { headerName: "型号", field: "productVersion", flex: 1 },
-    { headerName: "入库单号", field: "inventoryId", flex: 1 },
     { cellRenderer: ChangeProductComponent, cellRendererParams: { onClick: this.comeBackPopupData.bind(this) }, flex: 2 },
   ];
   onCellValueChanged = (event: CellValueChangedEvent) => {
@@ -72,14 +70,28 @@ export class InventoryComponent {
 
   rowSelection: "single" | "multiple" = "multiple";//设置多行选中 ，如果是mutiple则是多选，若是single则是单选
   pagination = true;//控制是否分页
-  paginationPageSize = 10;//分页，一页几行
-  paginationPageSizeSelector = [10, 20, 30];//可以设置一页几行
+  paginationPageSize = 16;//分页，一页几行
+  paginationPageSizeSelector = [25, 35, 45];//可以设置一页几行
 
   searchProduct() {
     // 发送http请求
-    this.http.post(`${this.preURL}/select`, { productId_serch: this.productId_serch, })
+    this.http.post(`${this.preURL}/select`, { inventory_id: this.productId_search })
       .subscribe(
-        (res: any) => { 
+        (res: any) => {
+          for (let i = 0; i < res.length; i++) {
+            console.log(res[0])
+            // 行数据在这里赋值
+            this.rowData.push({
+              productId: res[i].product_id,
+              productName: res[i].product_name,
+              productNumber: res[i].product_number,
+              productPrice: res[i].product_price,
+              productType: res[i].product_type,
+              productVersion: res[i].product_version
+            })
+            
+          }
+          this.gridApi.setRowData(this.rowData);
         })
   }
 
