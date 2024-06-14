@@ -26,6 +26,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { WelcomeModule } from './pages/welcome/welcome.module';
 import { AuthGuard } from './common/auth.guard';
 import { CommonService } from './common/common.service';
+import { MessagePromptBox } from './common/messagePromptBox';
 
 // 浏览器设定的语言
 let lang = (localStorage.getItem('currentLanguage') 
@@ -63,7 +64,8 @@ switch(lang) {
     provideAnimationsAsync(),
     provideHttpClient(),
     AuthGuard,
-    CommonService
+    CommonService,
+    MessagePromptBox
   ],
   bootstrap: [AppComponent]
 })

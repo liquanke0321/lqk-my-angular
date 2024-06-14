@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { UserAuthInfoModel } from '../model/user-auth-info-model';
 import { CommonService } from '../common/common.service';
+import { MessagePromptBox } from '../common/messagePromptBox';
 
 @Component({
   selector: 'app-login',
@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
 
   // 构造方法
   constructor(httpClient: HttpClient,
-    private notification: NzNotificationService,
     router: Router,
-    public common: CommonService
+    public common: CommonService,
+    public messagePromptBox: MessagePromptBox
   ) {
 
     this.http = httpClient;
@@ -41,13 +41,7 @@ export class LoginComponent implements OnInit {
   reslutType: string = ''
   reslutTitle: string = ''
   reslutMsg: string = ''
-  createNotification(reslutType: string, reslutTitle: string, reslutMsg: string): void {
-    this.notification.create(
-      reslutType,
-      reslutTitle,
-      reslutMsg
-    );
-  }
+
 
   sendUserMsg() {
     // 发送http请求
@@ -80,7 +74,7 @@ export class LoginComponent implements OnInit {
             this.reslutTitle = res.reslutTitle;
             this.reslutMsg = res.reslutMsg;
           }
-          this.createNotification(this.reslutType, this.reslutTitle, this.reslutMsg)
+          this.messagePromptBox.createNotification(this.reslutType, this.reslutTitle, this.reslutMsg)
         })
   }
 

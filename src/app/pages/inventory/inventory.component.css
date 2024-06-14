@@ -9,10 +9,8 @@
     width: 100%;
 }
 
-.select-content {
+.row {
     width: 100%;
-    height: 100px;
-
 }
 
 .select-content input {
@@ -26,4 +24,12 @@
 #myGrid {
     flex: 1 1 0px;
     width: 100%;
+}
+
+nz-select {
+    width: 200px;
+}
+
+input{
+    float: left;
 }

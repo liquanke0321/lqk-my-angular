@@ -9,13 +9,21 @@
                 <p>商品ID</p><input type="text" [(ngModel)]="productId" [disabled]="true">
             </div>
             <div>
-                <p>商品名称</p><input type="text" [(ngModel)]="product">
+                <p>商品名称</p><input type="text" [(ngModel)]="productName">
             </div>
             <div>
-                <p>分类</p><input type="text" [(ngModel)]="classification">
+                <p>数量</p><input type="text" [(ngModel)]="productNumber">
             </div>
             <div>
-                <p>价格</p><input type="text" [(ngModel)]="price">
+                <p>价格</p><input type="text" [(ngModel)]="productPrice">
+            </div>
+            <div>
+                <p>类型</p><nz-select  nzPlaceHolder="{{productType}}" [(ngModel)]="productType">
+                    <nz-option  *ngFor="let item of selectData; let i = index" nzLabel="{{item.typeName}}" nzValue="{{item.typeId}}" nztitle="aaaa"></nz-option>
+                  </nz-select>
+            </div>
+            <div>
+                <p>型号</p><input type="text" [(ngModel)]="productVersion">
             </div>
         </div>
         <div *ngIf="!buttonflg">

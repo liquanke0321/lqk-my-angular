@@ -12,12 +12,16 @@ export class ChangeProductComponent implements ICellRendererAngularComp {
 
   @Input('productId')
   productId: number = 0;
-  @Input('product')
-  product: string = '';
-  @Input('classification')
-  classification: string = '';
-  @Input('price')
-  price: number = 0;
+  @Input('productName')
+  productName: string = '';
+  @Input('productNumber')
+  productNumber: string = '';
+  @Input('productPrice')
+  productPrice: number = 0;
+  @Input('productType')
+  productType: number = 0;
+  @Input('productVersion')
+  productVersion: number = 0;
   @Input('buttonFlg')
   buttonFlg: boolean = true
 
@@ -28,9 +32,11 @@ export class ChangeProductComponent implements ICellRendererAngularComp {
     this.params = params
     this.dataRowIndex = params.rowIndex
     this.productId = params.data.productId;
-    this.product = params.data.product;
-    this.classification = params.data.classification;
-    this.price = params.data.price;
+    this.productName = params.data.productName;
+    this.productNumber = params.data.productNumber;
+    this.productPrice = params.data.productPrice;
+    this.productType = params.data.productType;
+    this.productVersion = params.data.productVersion;
   }
   refresh(params: ICellRendererParams<any, any, any>): boolean {
     return true
@@ -39,14 +45,20 @@ export class ChangeProductComponent implements ICellRendererAngularComp {
   getProductId(event: any) {
     this.productId = event
   }
-  getProduct(event: any) {
-    this.product = event
+  getProductName(event: any) {
+    this.productName = event
   }
-  getClassification(event: any) {
-    this.classification = event
+  getProductNumber(event: any) {
+    this.productNumber = event
   }
-  getPrice(event: any) {
-    this.price = event
+  getProductPrice(event: any) {
+    this.productPrice = event
+  }
+  getProductType(event: any) {
+    this.productType = event
+  }
+  getProductVersion(event: any) {
+    this.productVersion = event
   }
   getButtonFlg(event: any) {
     this.buttonFlg = event
@@ -56,13 +68,16 @@ export class ChangeProductComponent implements ICellRendererAngularComp {
     if (this.params.onClick instanceof Function) {
 
       // put anything into params u want pass into parents component
+      console.log("this.productName-【"+this.productName)
       const params = {
         // rowData: this.params.node.data,//可以只传有用的东西
         buttonFlg: this.buttonFlg,
         productId: this.productId,
-        product: this.product,
-        classification: this.classification,
-        price: this.price,
+        productName: this.productName,
+        productNumber: this.productNumber,
+        productPrice: this.productPrice,
+        productType: this.productType,
+        productVersion: this.productVersion,
         rowIndex: this.dataRowIndex
       }
       
