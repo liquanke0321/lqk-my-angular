@@ -6,24 +6,24 @@
     <div *nzModalContent>
         <div *ngIf="buttonflg">
             <div>
-                <p>商品ID</p><input type="text" [(ngModel)]="productId" [disabled]="true">
+                <p>商品ID</p><input type="text" [(ngModel)]="product.product_id" [disabled]="true">
             </div>
             <div>
-                <p>商品名称</p><input type="text" [(ngModel)]="productName">
+                <p>商品名称</p><input type="text" [(ngModel)]="product.product_name">
             </div>
             <div>
-                <p>数量</p><input type="text" [(ngModel)]="productNumber">
+                <p>数量</p><input type="text" [(ngModel)]="product.product_number">
             </div>
             <div>
-                <p>价格</p><input type="text" [(ngModel)]="productPrice">
+                <p>价格</p><input type="text" [(ngModel)]="product.product_price">
             </div>
-            <div>
-                <p>类型</p><nz-select  nzPlaceHolder="{{productType}}" [(ngModel)]="productType">
-                    <nz-option  *ngFor="let item of selectData; let i = index" nzLabel="{{item.typeName}}" nzValue="{{item.typeId}}" nztitle="aaaa"></nz-option>
+            <div >
+                <p>类型</p><nz-select  nzPlaceHolder="{{product.product_type}}" [(ngModel)]="product.product_type" style="width: 200px;">
+                    <nz-option   *ngFor="let item of selectData; let i = index" nzLabel="{{item.typeName}}" nzValue="{{item.typeId}}"></nz-option>
                   </nz-select>
             </div>
             <div>
-                <p>型号</p><input type="text" [(ngModel)]="productVersion">
+                <p>型号</p><input type="text" [(ngModel)]="product.product_version">
             </div>
         </div>
         <div *ngIf="!buttonflg">

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProductModel } from '../../model/product-model';
 
 @Component({
   selector: 'app-popup',
@@ -8,6 +9,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PopupComponent implements OnInit{
 
+  
   @Input('buttonName')
   buttonName: string = ''
 
@@ -16,36 +18,13 @@ export class PopupComponent implements OnInit{
   @Output()
   getButtonFlg = new EventEmitter();
 
-  @Input('productId')
-  productId: number = 0
+  @Input('product')
+  product: ProductModel = new ProductModel
+  
+  product_type:string=this.product.product_type
   @Output()
-  getProductId = new EventEmitter();
-
-  @Input('productName')
-  productName: string = ''
-  @Output()
-  getProductName = new EventEmitter();
-
-  @Input('productNumber')
-  productNumber: string = ''
-  @Output()
-  getProductNumber = new EventEmitter();
-
-  @Input('productPrice')
-  productPrice: number = 0
-  @Output()
-  getProductPrice = new EventEmitter();
-
-  @Input('productType')
-  productType: number = 0
-  @Output()
-  getProductType = new EventEmitter();
-
-  @Input('productVersion')
-  productVersion: number = 0
-  @Output()
-  getProductVersion = new EventEmitter();
-
+  getProduct = new EventEmitter();
+  
    //配置http请求
    http: HttpClient
   constructor(httpClient: HttpClient) {
@@ -76,26 +55,18 @@ export class PopupComponent implements OnInit{
 
   handleOk(): void {
     if (this.buttonflg) {
-      console.log("this.productId"+this.productId+"this.productName---"+this.productName)
       this.isOkLoading = true;
       this.getButtonFlg.emit(this.buttonflg);
-      this.getProductId.emit(this.productId);
-      this.getProductName.emit(this.productName);
-      this.getProductNumber.emit(this.productNumber);
-      this.getProductPrice.emit(this.productPrice);
-      this.getProductType.emit(this.productType);
-      this.getProductVersion.emit(this.productVersion);
-      setTimeout(() => {
-        this.isVisible = false;
-        this.isOkLoading = false;
-      }, 1000);
+      this.getProduct.emit(this.product);
+
+  
     }else{
       this.isOkLoading = true;
       this.getButtonFlg.emit(this.buttonflg);
       setTimeout(() => {
         this.isVisible = false;
         this.isOkLoading = false;
-      }, 1000);
+      }, 1);
     }
   }
 

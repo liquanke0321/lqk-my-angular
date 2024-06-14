@@ -1,20 +1,8 @@
 <app-popup [buttonName]="'更新'" [buttonFlg]="true"
-    [productId]="productId"
-    [productName]="productName" 
-    [productNumber]="productNumber"
-    [productPrice]="productPrice" 
-    [productType]="productType" 
-    [productVersion]="productVersion"
-    
-    (getProductId)="getProductId($event)"
-    (getProductName)="getProductName($event)"
-    (getProductNumber)="getProductNumber($event)"
-    (getProductPrice)="getProductPrice($event)"
-    (getProductType)="getProductType($event)" 
-    (getProductVersion)="getProductVersion($event)"
+    [product]="product"
+    (getProductVersion)="getProduct($event)"
     (getButtonFlg)="getButtonFlg($event)"
-    nzAfterClose="onClick()">
-    
+    >
 </app-popup>
 
 <app-popup [buttonName]="'删除'" [buttonFlg]="false" 

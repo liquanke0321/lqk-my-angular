@@ -1,4 +1,4 @@
-export class InbentoryModel {
+export class ProductModel {
     /**
        * 入库单号，入库单号
        */
